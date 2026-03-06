@@ -28,6 +28,10 @@ float features[6];
 int32_t result[4];
 char buffer[50];
 
+String baseUrl = "url1";
+String baseUrl2 = "url2";
+String userId = "id";
+
 MAX30105 particleSensor;
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 Systolic systolic;
@@ -97,7 +101,7 @@ void loop() {
 bool getParam() {
   HTTPClient http;
 
-  http.begin("https://paul-predict-production.up.railway.app/api/user/123456");
+  http.begin(baseUrl + userId);
   http.addHeader("Content-Type", "application/json");
 
   if (http.GET() > 0) {
@@ -284,7 +288,7 @@ void getDementialStatus() {
 
   HTTPClient http;
 
-  http.begin("https://paul-predict-production.up.railway.app/api/user");
+  http.begin(baseUrl);
   http.addHeader("Content-Type", "application/json");
 
   const char* chol = (result[3] == 1) ? "Yes" : "No";
@@ -328,7 +332,7 @@ void getDementialStatus() {
   delay(10000);
 
   HTTPClient httpGet;
-  httpGet.begin("https://paul-predict-production.up.railway.app/api/prediction/123456");
+  httpGet.begin(baseUrl2 + userId;);
 
   retryCount = 0;
 
